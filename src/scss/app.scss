@@ -1,0 +1,60 @@
+@import 'areas';
+
+
+header {
+    grid-area: header;
+
+    .header__container {
+        display: flex;
+        min-height: 10vh;
+        background-color: #f1ad2f;
+        width: 100vw;
+        align-items: center;
+        justify-content: center;
+        color: $titulo;
+        font-size: 3rem;
+    }
+
+
+}
+
+main {
+    grid-area: main;
+
+    .main__container {
+        display: flex;
+        min-height: 90vh;
+        padding: 2rem;
+
+        @include media('xl2'){
+            // min-height:78vh;
+        }
+
+        .produtos {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr 1fr;
+
+            @include media('lg'){
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    }
+
+    
+
+}
+
+footer {
+    grid-area: footer;
+
+    .footer__container {
+        display: flex;
+        min-height: 5vh;
+        align-items: center;
+        justify-content: center;
+        color: $footerColor;
+    }
+}
