@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import glImage from "../assets/gl.png";
+import glImage from "/assets/gl.png";
 export default {
   props: {
     produto: {

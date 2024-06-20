@@ -1,8 +1,8 @@
 <template>
   <div class="produto-lista">
     <div
-      v-for="(produto, index) in produtos"
-      :key="index"
+      v-for="produto in produtos"
+      :key="produto.id"
       class="produto-card"
       @click="selecionarProduto(produto)"
     >
@@ -16,53 +16,36 @@
   </div>
 </template>
 <script>
-import glImage from "../assets/gl.png";
-import smImage from "../assets/socialMedia.jpg";
-import fnImage from "../assets/familiaNomade.webp";
-import efImage from "../assets/educacaoFinanceira.png";
-import gaImage from "../assets/googleAds.png";
+// import { getProdutos } from '@/services/produtosService';
+import axios from "axios";
+// const API_URL = 'http://localhost:3000/api/produtos';
 export default {
   data() {
     return {
-      produtos: [
-        {
-          imagem: glImage,
-          nome: "GetLeads",
-          resumo:
-            "Uma ferramenta. Várias possibilidades. Com apenas uma ferramenta e alguns cliques, você terá seu próprio site de maneira prática e bonita. ",
-          link: "https://go.hotmart.com/S6894395K",
-        },
-        {
-          imagem: smImage,
-          nome: "Torne-se um Social Media",
-          resumo: "Parabéns por sua decisão de se tornar um Social Media!",
-          link: "https://go.hotmart.com/A93266264S",
-        },
-        {
-          imagem: fnImage,
-          nome: "Mapa do Caminho",
-          resumo: "APRENDA A GANHAR DINHEIRO VIAJANDO",
-          link: "https://go.hotmart.com/E93715888S?dp=1",
-        },
-        {
-          imagem: efImage,
-          nome: "Educação Financeira",
-          resumo: "O melhor material de Educação Financeira!",
-          link: "https://go.hotmart.com/C93716039I",
-        },
-        {
-          imagem: gaImage,
-          nome: "O Clube Google Ads Xpress",
-          resumo:
-            "O Clube Google Ads Xpress é um Treinamento Completo para quem deseja aprender anunciar no Google",
-          link: "https://go.hotmart.com/K93716177F?dp=1",
-        },
-      ],
+      produtos: [],
+      loading: true,
+      error: null,
+      API_URL: "http://localhost:3000/api/produtos",
     };
   },
+  mounted() {
+    this.listaProdutos();
+  },
+
   methods: {
     selecionarProduto(produto) {
       this.$emit("produtoSelecionado", produto);
+    },
+    async listaProdutos() {
+      try {
+        const response = await axios.get(this.API_URL);
+        this.produtos = response.data;
+      } catch (error) {
+        this.error =  'Erro ao carregar os produtos';
+        console.error(error);
+      }finally{
+        this.loading = false;
+      }
     },
   },
 };
