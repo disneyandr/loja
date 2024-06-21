@@ -25,7 +25,7 @@ export default {
       produtos: [],
       loading: true,
       error: null,
-      API_URL: "http://localhost:3000/api/produtos",
+      API_URL: "https://disne4173.c44.integrator.host/api/produtos",
     };
   },
   mounted() {
